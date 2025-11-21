@@ -94,7 +94,7 @@ python main.py -f data/issuu_sample.json -t 7
 
 -----
 
-## 🛠️ Project Structure
+## Project Structure
 
 | File | Description | Key Features |
 | :--- | :--- | :--- |
