@@ -1,4 +1,4 @@
-## README: Document Tracker Analytics
+## Document Tracker Analytics
 
 This repository contains the source code for a data-intensive Python application designed to analyze document tracking data, such as that from the **issuu.com** platform. The application includes both a Command-Line Interface (CLI) for batch processing and a Graphical User Interface (GUI) for interactive visualization.
 
