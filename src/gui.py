@@ -46,6 +46,17 @@ def generate_continent_hist():
     results = views_by_continent(doc_id, file_path)
     show_histogram(results, f"Views by Continent")
 
+
+def generate_browser_full_hist(): 
+    results = views_by_browser_full(file_path)
+    show_histogram(results, f"Views by Full Browser User Agent")
+
+
+def generate_browser_main_hist():
+    results = views_by_browser_main(file_path)
+    show_histogram(results, f"Views by Main Browser Name")
+    
+
 def show_top_readers():
     text_display.delete(1.0, END)  # Clear previous text    
     results = top_readers(file_path)
@@ -135,13 +146,6 @@ def show_also_likes_graph():
     except Exception as e:
         text_display.insert(END, f"Error: {e}\n")
 
-def generate_browser_full_hist(): # Task 3a
-    results = views_by_browser_full(file_path)
-    show_histogram(results, f"Views by Full Browser User Agent")
-
-def generate_browser_main_hist(): # Task 3b
-    results = views_by_browser_main(file_path)
-    show_histogram(results, f"Views by Main Browser Name")
 # MAIN GUI SETUP
 root = Tk()
 root.title("Document Tracker Analytics - Histogram Viewer")
@@ -172,19 +176,20 @@ btn_frame.pack(pady=10)
 
 ttk.Button(btn_frame, text="Views by Country", command=generate_country_hist).grid(row=0, column=0, padx=5)
 ttk.Button(btn_frame, text="Views by Continent", command=generate_continent_hist).grid(row=0, column=1, padx=5)
-ttk.Button(btn_frame, text="Top 10 Readers", command=show_top_readers).grid(row=0, column=2, padx=5)
 
-ttk.Button(btn_frame, text="Also Likes (Top 10 Docs)", command=show_also_likes).grid(row=1, column=0, columnspan=2, pady=5)
-# Task 3a, 3b
-ttk.Button(btn_frame, text="Browser (Full Agent 3a)", command=generate_browser_full_hist).grid(row=3, column=0, padx=5, pady=5)
-ttk.Button(btn_frame, text="Browser (Main Name 3b)", command=generate_browser_main_hist).grid(row=3, column=1, padx=5, pady=5)
+ttk.Button(btn_frame, text="Browser (Full Agent 3a)", command=generate_browser_full_hist).grid(row=1, column=0, padx=5, pady=5)
+ttk.Button(btn_frame, text="Browser (Main Name 3b)", command=generate_browser_main_hist).grid(row=1, column=1, padx=5, pady=5)
+
+ttk.Button(btn_frame, text="Top 10 Readers", command=show_top_readers).grid(row=2, column=0, padx=5)
+
+ttk.Button(btn_frame, text="Also Likes (Top 10 Docs)", command=show_also_likes).grid(row=3, column=0, padx=5)
 
 
 ttk.Button(
     btn_frame,
     text="Also Likes Graph (Task 6)",
     command=show_also_likes_graph
-).grid(row=1, column=2, columnspan=3, pady=5)
+).grid(row=3, column=1, padx=5)
 
 # HISTOGRAM DISPLAY FRAME
 frame_histogram = ttk.Frame(root, padding="10")
