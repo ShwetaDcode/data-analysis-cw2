@@ -86,44 +86,8 @@ python main.py -u 88c39a2a81272740 -d 140219141540-c900b41f845c67cc08b58911155c6
 **TASK 7 – Launch GUI**
 python main.py -t 7 -f ./data/issuu_sample.json
 
----
-
-### 2\. Graphical User Interface (GUI)
-
-The GUI provides a visual interface for all tasks, rendering histograms and the Also Likes graph using Matplotlib.
-
-#### Launching the GUI (Task 7)
-
-```bash
-python main.py -f data/issuu_sample.json -t 7
-```
-
 #### GUI Controls
 
 - **Inputs:** Enter **Document UUID** and **Visitor UUID** at the top.
 - **Left Panel:** Displays text output for analytical tasks (e.g., Top Readers, Also Likes list).
 - **Right Panel:** Displays graphical output (Histograms, Network Graph).
-
----
-
-## Project Structure
-
-| File                     | Description                                                                                    | Key Features                                                                                                                                                                                       |
-| :----------------------- | :--------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `main.py`                | **CLI Driver.** Uses `argparse` to handle command-line inputs and executes the specified task. | Contains logic for printing results in a readable CLI format.                                                                                                                                      |
-| `dataloader.py`          | **Data Access Layer.** Handles file I/O.                                                       | Uses a **generator function** (`yield`) for memory-efficient, line-by-line reading of large JSON files.                                                                                            |
-| `analysis.py`            | **Core Business Logic.** Contains all analytics functions.                                     | Implements logic for geo-analysis, browser parsing, reader time aggregation, and the **parametrised "Also Likes"** recommendation system (Task 5c). Uses `networkx` for graph generation (Task 6). |
-| `gui.py`                 | **User Interface.** Builds the Tkinter application.                                            | Integrates all analysis functions and embeds Matplotlib visualizations (histograms, graph) into the window.                                                                                        |
-| `continents.py`          | **Configuration.**                                                                             | Contains the country-to-continent mapping dictionary.                                                                                                                                              |
-| `data/issuu_sample.json` | **Input Data.**                                                                                | The required data file (not provided in this repository, must be added by the user).                                                                                                               |
-
-also_likes.py
-Contains recommendation logic for also-likes and shared-reader calculations.
-
----
-
-## Key Design Features
-
-- **Scalability (Functional Programming):** The `dataloader.py` uses **Python generators** to process the data stream line-by-line, preventing memory-based issues when dealing with large datasets (millions of lines).
-- **Flexibility (Higher-Order Functions):** The core recommendation function, `also_likes_documents` (Task 5c), accepts a **sorting function** as a parameter. This allows the ranking criteria (e.g., shared readers, weighted by document length, etc.) to be changed easily without altering the main logic.
-- **Graph Analysis (NetworkX):** The "Also Likes" relationship (Task 6) is modeled using the `networkx` library, which is then visualized in the GUI, providing a powerful structure for link analysis.

@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from analysis import views_by_country, views_by_continent, top_readers
 from also_likes import function_d_run, generate_also_likes_graph
+from browser_analysis import views_by_browser_full, views_by_browser_main
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -30,12 +31,18 @@ def show_histogram(data_dict, title):
 
 def generate_country_hist():
     doc_id = doc_input.get()
+    if not doc_id:
+        text_display.insert(END, "Invalid document ID or missing. Please enter a valid document UUID.\n")
+        return
     results = views_by_country(doc_id, file_path)
     show_histogram(results, f"Views by Country")
 
 
 def generate_continent_hist():
     doc_id = doc_input.get()
+    if not doc_id:
+        text_display.insert(END, "Invalid document ID or missing. Please enter a valid document UUID.\n")
+        return
     results = views_by_continent(doc_id, file_path)
     show_histogram(results, f"Views by Continent")
 
@@ -128,6 +135,13 @@ def show_also_likes_graph():
     except Exception as e:
         text_display.insert(END, f"Error: {e}\n")
 
+def generate_browser_full_hist(): # Task 3a
+    results = views_by_browser_full(file_path)
+    show_histogram(results, f"Views by Full Browser User Agent")
+
+def generate_browser_main_hist(): # Task 3b
+    results = views_by_browser_main(file_path)
+    show_histogram(results, f"Views by Main Browser Name")
 # MAIN GUI SETUP
 root = Tk()
 root.title("Document Tracker Analytics - Histogram Viewer")
@@ -161,6 +175,10 @@ ttk.Button(btn_frame, text="Views by Continent", command=generate_continent_hist
 ttk.Button(btn_frame, text="Top 10 Readers", command=show_top_readers).grid(row=0, column=2, padx=5)
 
 ttk.Button(btn_frame, text="Also Likes (Top 10 Docs)", command=show_also_likes).grid(row=1, column=0, columnspan=2, pady=5)
+# Task 3a, 3b
+ttk.Button(btn_frame, text="Browser (Full Agent 3a)", command=generate_browser_full_hist).grid(row=3, column=0, padx=5, pady=5)
+ttk.Button(btn_frame, text="Browser (Main Name 3b)", command=generate_browser_main_hist).grid(row=3, column=1, padx=5, pady=5)
+
 
 ttk.Button(
     btn_frame,
