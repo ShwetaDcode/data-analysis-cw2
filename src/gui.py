@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from analysis import views_by_country, views_by_continent, top_readers
 from also_likes import function_d_run, generate_also_likes_graph
-from browser_analysis import views_by_browser_full, views_by_browser_main
+from browser_analysis import views_by_browser_full_plot_friendly, views_by_browser_full, views_by_browser_main
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -28,6 +28,10 @@ def show_histogram(data_dict, title):
     canvas.draw()
     canvas.get_tk_widget().pack(fill=BOTH, expand=True)
 
+def update_text_output(text_content): # FIX: Removed 'self' and uses global 'text_display'
+    """Clears the output area and inserts new content."""
+    text_display.delete('1.0', END) # FIX: Using global 'text_display'
+    text_display.insert(END, text_content)
 
 def generate_country_hist():
     doc_id = doc_input.get()
@@ -50,6 +54,18 @@ def generate_continent_hist():
 def generate_browser_full_hist(): 
     results = views_by_browser_full(file_path)
     show_histogram(results, f"Views by Full Browser User Agent")
+
+
+def generate_browser_full_hist_part():
+    tagged_counts, tag_mapping = views_by_browser_full_plot_friendly(file_path)
+    
+    show_histogram(tagged_counts, "Views by Full Browser User Agent (Top 10/Tagged)")
+    
+    legend_text = "Legend for Plot-Friendly View (3a_part):\n\n"
+    for tag, description in tag_mapping.items():
+        legend_text += f"{tag:<10}: {description}\n"
+        
+    update_text_output(legend_text)
 
 
 def generate_browser_main_hist():
@@ -178,7 +194,8 @@ ttk.Button(btn_frame, text="Views by Country", command=generate_country_hist).gr
 ttk.Button(btn_frame, text="Views by Continent", command=generate_continent_hist).grid(row=0, column=1, padx=5)
 
 ttk.Button(btn_frame, text="Browser (Full Agent 3a)", command=generate_browser_full_hist).grid(row=1, column=0, padx=5, pady=5)
-ttk.Button(btn_frame, text="Browser (Main Name 3b)", command=generate_browser_main_hist).grid(row=1, column=1, padx=5, pady=5)
+ttk.Button(btn_frame, text="Browser (Full Agent 3a_part)", command=generate_browser_full_hist_part).grid(row=1, column=1, padx=5, pady=5)
+ttk.Button(btn_frame, text="Browser (Main Name 3b)", command=generate_browser_main_hist).grid(row=1, column=2, padx=5, pady=5)
 
 ttk.Button(btn_frame, text="Top 10 Readers", command=show_top_readers).grid(row=2, column=0, padx=5)
 
