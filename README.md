@@ -66,28 +66,31 @@ python main.py -f <file_name> -t <task_id> [-d <doc_uuid>] [-u <user_uuid>]
 #### CLI Examples
 
 **TASK 2A – Views by country**
-python main.py -d 140219141540-c900b41f845c67cc08b58911155c681c -t 2a -f ./data/issuu_sample.json
+python cw2.py -d 140219141540-c900b41f845c67cc08b58911155c681c -t 2a -f ./data/issuu_sample.json
 
 **TASK 2B – Views by continent**
-python main.py -d 140219141540-c900b41f845c67cc08b58911155c681c -t 2b -f ./data/issuu_sample.json
+python cw2.py -d 140219141540-c900b41f845c67cc08b58911155c681c -t 2b -f ./data/issuu_sample.json
 
 **TASK 3A – Views by full browser**
-python main.py -t 3a -f data/issuu_sample.json
+python cw2.py -t 3a -f data/issuu_sample.json
 
 **TASK 3B – Views by main browser**
-python main.py -t 3b -f data/issuu_sample.json
+python cw2.py -t 3b -f data/issuu_sample.json
 
 **TASK 4 – Top readers**
-python main.py -t 4 -f ./data/issuu_sample.json
+python cw2.py -t 4 -f ./data/issuu_sample.json
 
 **TASK 5D – Also likes**
-python main.py -u 88c39a2a81272740 -d 140219141540-c900b41f845c67cc08b58911155c681c -t 5d -f ./data/issuu_sample.json
+python cw2.py -u 88c39a2a81272740 -d 140219141540-c900b41f845c67cc08b58911155c681c -t 5d -f ./data/issuu_sample.json
 
 **TASK 7 – Launch GUI**
-python main.py -t 7 -f ./data/issuu_sample.json
+python cw2.py -t 7 -f ./data/issuu_sample.json
 
 #### GUI Controls
 
 - **Inputs:** Enter **Document UUID** and **Visitor UUID** at the top.
 - **Left Panel:** Displays text output for analytical tasks (e.g., Top Readers, Also Likes list).
 - **Right Panel:** Displays graphical output (Histograms, Network Graph).
+
+exe controls cw2.exe
+.\cw2.exe -t 7 -f data/issuu_sample.json
