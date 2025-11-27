@@ -7,7 +7,16 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import networkx as nx
 
+# Small Datasets
 file_path = "./data/issuu_sample.json"
+# file_path = "./data/sample_tiny.json"          # Uncomment to Load
+# file_path = "./data/sample_small.json"         # Uncomment to Load
+
+# Large Datasets (Currently Only 100k lines dataset is included in zip, to maintain convenient project .zip size)
+# file_path = "./data/sample_100k_lines.json"
+# file_path = "./data/sample_400k_lines-1.json"  # Uncomment to Load (Not Included in .zip to maintain convenient .zip size)
+# file_path = "./data/sample_600k_lines.json"    # Uncomment to Load (Not Included in .zip to maintain convenient .zip size)
+# file_path = "./data/sample_3m_lines.json"      # Uncomment to Load (Not Included in .zip to maintain convenient .zip size)
 
 def show_histogram(data_dict, title):
     """Re-usable histogram embedder for Tkinter."""
